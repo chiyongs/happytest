@@ -1,20 +1,16 @@
-package com.ssafy.happyhouse.model;
+package com.ssafy.happyhouse.model.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Member {
+public class MemberDTO {
 	private String id;
-	private String name;
 	private String password;
-	private String address;
+	private String name;
 	private String tel;
-	
+	private String address;
 }

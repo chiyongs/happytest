@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.model.NoticeDto;
+import com.ssafy.happyhouse.model.dto.NoticeDto;
 import com.ssafy.happyhouse.model.mapper.NoticeMapper;
 
 import lombok.RequiredArgsConstructor;

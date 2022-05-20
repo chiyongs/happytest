@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.model.HouseInfoDto;
-import com.ssafy.happyhouse.model.SidoGugunCodeDto;
+import com.ssafy.happyhouse.model.dto.HouseInfoDto;
+import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
 import com.ssafy.happyhouse.model.mapper.HouseMapMapper;
 
 @Service

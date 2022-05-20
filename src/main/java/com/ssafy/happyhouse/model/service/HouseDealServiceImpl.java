@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.model.HouseDealDto;
+import com.ssafy.happyhouse.model.dto.HouseDealDto;
 import com.ssafy.happyhouse.model.mapper.HouseDealMapper;
 import com.ssafy.happyhouse.util.PageNavigation;
 

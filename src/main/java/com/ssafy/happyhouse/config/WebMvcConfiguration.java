@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 @EnableAspectJAutoProxy
 @Configuration
 @MapperScan(basePackages = {"com.ssafy.**.mapper"})

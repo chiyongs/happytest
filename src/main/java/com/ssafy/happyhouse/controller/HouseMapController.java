@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.happyhouse.model.HouseInfoDto;
-import com.ssafy.happyhouse.model.SidoGugunCodeDto;
+import com.ssafy.happyhouse.model.dto.HouseInfoDto;
+import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
 import com.ssafy.happyhouse.model.service.HouseMapService;
 
 @CrossOrigin("*")

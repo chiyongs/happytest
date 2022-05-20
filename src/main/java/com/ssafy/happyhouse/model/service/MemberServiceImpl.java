@@ -3,21 +3,32 @@ package com.ssafy.happyhouse.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.happyhouse.model.Member;
+import com.ssafy.happyhouse.model.dto.MemberDTO;
 import com.ssafy.happyhouse.model.repo.MemberRepo;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	@Autowired
-	MemberRepo mRepo;
+	private final MemberRepo mRepo;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	@Transactional
-	public int insert(Member member) {
+	public int join(MemberDTO dto) {
+		String rawPassword = dto.getPassword();
+		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+		
+		Member member = Member.builder()
+				.id(dto.getId()).password(encPassword).tel(dto.getTel()).address(dto.getAddress()).name(dto.getName()).build();
+		
 		return mRepo.insert(member);
 	}
 
