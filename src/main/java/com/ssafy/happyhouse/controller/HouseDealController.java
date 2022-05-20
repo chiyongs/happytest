@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ssafy.happyhouse.model.service.HouseMapService;
+import com.ssafy.happyhouse.model.service.house.HouseMapService;
 
 @Controller
 @RequestMapping("/DealInfo")

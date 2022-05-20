@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.happyhouse.model.Member;
+import com.ssafy.happyhouse.model.domain.Member;
 import com.ssafy.happyhouse.model.dto.NoticeDto;
-import com.ssafy.happyhouse.model.service.NoticeService;
+import com.ssafy.happyhouse.model.service.notice.NoticeService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

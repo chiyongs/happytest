@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.model.Member;
+import com.ssafy.happyhouse.model.domain.Member;
 import com.ssafy.happyhouse.model.repo.MemberRepo;
 
 import lombok.extern.slf4j.Slf4j;

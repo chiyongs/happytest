@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model;
+package com.ssafy.happyhouse.model.domain;
 
 import com.ssafy.happyhouse.model.dto.MemberDTO;
 

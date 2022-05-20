@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ssafy.happyhouse.model.Member;
-import com.ssafy.happyhouse.model.service.MemberService;
+import com.ssafy.happyhouse.model.domain.Member;
+import com.ssafy.happyhouse.model.service.member.MemberService;
 
 
 //@Controller

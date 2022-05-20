@@ -1,11 +1,11 @@
-package com.ssafy.happyhouse.model.service;
+package com.ssafy.happyhouse.model.service.member;
 
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
 
 import com.ssafy.happyhouse.config.auth.jwt.JwtAuthenticationResponse;
-import com.ssafy.happyhouse.model.Member;
+import com.ssafy.happyhouse.model.domain.Member;
 import com.ssafy.happyhouse.model.dto.MemberDTO;
 
 public interface MemberService {

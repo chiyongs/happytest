@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.dto.HouseInfoDto;
 import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
-import com.ssafy.happyhouse.model.service.HouseMapService;
+import com.ssafy.happyhouse.model.service.house.HouseMapService;
 
 @CrossOrigin("*")
 @RequestMapping("/map")

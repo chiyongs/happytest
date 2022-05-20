@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model.service;
+package com.ssafy.happyhouse.model.service.house;
 
 import java.util.List;
 import java.util.Map;

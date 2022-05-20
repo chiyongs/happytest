@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.ssafy.happyhouse.model.Member;
+import com.ssafy.happyhouse.model.domain.Member;
 
 import lombok.Getter;
 

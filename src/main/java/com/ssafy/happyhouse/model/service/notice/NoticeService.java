@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model.service;
+package com.ssafy.happyhouse.model.service.notice;
 
 import java.util.List;
 

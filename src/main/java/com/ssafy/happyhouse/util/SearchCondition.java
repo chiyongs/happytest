@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model;
+package com.ssafy.happyhouse.util;
 
 public class SearchCondition {
 	// 한 페이지에 몇개나 보여줄 것인지 결정한다.

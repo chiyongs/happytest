@@ -1,6 +1,6 @@
 package com.ssafy.happyhouse.model.dto;
 
-import com.ssafy.happyhouse.model.Member;
+import com.ssafy.happyhouse.model.domain.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -19,7 +19,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.happyhouse.config.auth.PrincipalDetails;
-import com.ssafy.happyhouse.model.Member;
+import com.ssafy.happyhouse.model.domain.Member;
 
 import lombok.RequiredArgsConstructor;
 

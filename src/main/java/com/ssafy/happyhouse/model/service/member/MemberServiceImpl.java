@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model.service;
+package com.ssafy.happyhouse.model.service.member;
 
 import java.util.Date;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.ssafy.happyhouse.config.auth.PrincipalDetails;
 import com.ssafy.happyhouse.config.auth.jwt.JwtAuthenticationResponse;
 import com.ssafy.happyhouse.config.auth.jwt.JwtProperties;
-import com.ssafy.happyhouse.model.Member;
+import com.ssafy.happyhouse.model.domain.Member;
 import com.ssafy.happyhouse.model.dto.MemberDTO;
 import com.ssafy.happyhouse.model.repo.MemberRepo;
 
