@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.VirtualHousePriceMapper">
+	
+	<insert id="start" >
+		insert into virtual_house_price(apt_code, price) (select h.aptCode, (select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode)) price from houseinfo h);
+	</insert>
+	
+	<select id="selectAll" resultType="VirtualHousePrice">
+		select * from virtual_house_price;
+	</select>
+	
+	<select id="findByAptCode" parameterType="int" resultType="VirtualHousePrice">
+		select * from virtual_house_price where aptCode = #{aptCode};
+	</select>
+</mapper>

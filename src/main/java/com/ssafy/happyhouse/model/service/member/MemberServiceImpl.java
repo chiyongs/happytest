@@ -107,4 +107,10 @@ public class MemberServiceImpl implements MemberService {
 		return mRepo.update(new Member().dtoToMember(dto));
 	}
 
+
+	@Override
+	public int happy(Member member) {
+		return mRepo.happy(member);
+	}
+
 }

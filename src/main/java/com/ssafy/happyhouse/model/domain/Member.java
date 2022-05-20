@@ -19,6 +19,7 @@ public class Member {
 	private String password;
 	private String address;
 	private String tel;
+	private int happiness;
 	
 	public Member dtoToMember(MemberDTO dto) {
 		this.id = dto.getId();
@@ -26,6 +27,15 @@ public class Member {
 		this.password = dto.getPassword();
 		this.address = dto.getAddress();
 		this.tel = dto.getTel();
+		this.happiness = dto.getHappiness();
 		return this;
+	}
+	
+	public void happy() {
+		this.happiness += 10;
+	}
+	
+	public void unhappy() {
+		this.happiness -= 10;
 	}
 }
