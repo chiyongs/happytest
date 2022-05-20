@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.HouseDealMapper">
+
+	<select id="getDeals" parameterType="integer" resultType="housedealdto">
+		select * from housedeal where aptCode = #{aptCode}
+	</select>
+	
+	<select id="getAll" parameterType="int"	resultType="housedealdto">
+	select hd.no, hd.aptCode, hd.dealAmount, hd.dealYear, hd.dealMonth, hd.dealDay, hd.area, hd.floor, hd.type, hd.rentMoney, hi.aptName from housedeal hd join houseinfo hi on hd.aptCode = hi.aptCode
+	limit #{start}, #{amount}
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*)
+		from housedeal
+	</select>
+	
+</mapper>

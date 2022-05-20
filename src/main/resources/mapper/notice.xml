@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.NoticeMapper">
+
+	<insert id="insert" parameterType="NoticeDto">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			select max(id) from notice
+		</selectKey>
+		insert into notice(title, content, author, createTime)
+		values(#{title}, #{content}, #{author}, #{createTime})
+	</insert>
+
+	<update id="update" parameterType="NoticeDto">
+		update notice set title=#{title}, author=#{author}, content=#{content}
+		where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="integer">
+		delete from notice where id = #{id}
+	</delete>
+
+	<select id="searchAll" resultType="NoticeDto">
+		select * from notice order by createTime desc;
+	</select>
+	
+	<select id="selectById" parameterType="integer" resultType="NoticeDto">
+		select * from notice where id = #{id}
+	</select>
+	
+	<select id="searchByTitle" parameterType="string" resultType="NoticeDto">
+		select * from notice where title like concat('%',#{title},'%')
+	</select>
+	
+</mapper>
