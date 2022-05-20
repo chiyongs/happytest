@@ -60,6 +60,9 @@ public class GameServiceImpl {
 		memberService.happy(member);
 		
 		GameEntity game = new GameEntity(vhp, dto.getId());
+		
+		game = mapper.findByUserIdAndAptCode(game);
+		
 		return mapper.delete(game);
 		
 	}
