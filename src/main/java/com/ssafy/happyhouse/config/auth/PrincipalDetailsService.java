@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import com.ssafy.happyhouse.model.Member;
 import com.ssafy.happyhouse.model.repo.MemberRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class PrincipalDetailsService implements UserDetailsService {
 	
@@ -19,7 +22,9 @@ public class PrincipalDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		log.debug("username = {}",username);
 		Member findMember = repo.select(username);
+		log.debug("findMember = {}",findMember);
 		if(findMember == null) return null;
 		
 		return new PrincipalDetails(findMember);

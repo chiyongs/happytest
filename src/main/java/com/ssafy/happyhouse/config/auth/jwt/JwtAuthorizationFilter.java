@@ -45,11 +45,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 		}
 		
 		String jwtToken = request.getHeader(JwtProperties.HEADER_STRING).replace("Bearer ","");
-        String username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(jwtToken).getClaim("username").asString();
+        String id = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(jwtToken).getClaim("id").asString();
 
         // 서명이 정상적으로 작동함
-        if (username != null) {
-            Member findMember = repo.select(username);
+        if (id != null) {
+            Member findMember = repo.select(id);
 
             PrincipalDetails principalDetails = new PrincipalDetails(findMember);
 
