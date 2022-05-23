@@ -1,9 +1,13 @@
 package com.ssafy.happyhouse.model.service.game;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.ssafy.happyhouse.model.domain.GameEntity;
 import com.ssafy.happyhouse.model.domain.Member;
 import com.ssafy.happyhouse.model.domain.VirtualHousePrice;
@@ -24,7 +28,13 @@ public class GameServiceImpl {
 	private final MemberService memberService;
 
 	public int startGame() {
+		vmapper.deleteAll();
 		return vmapper.start();
+	}
+	
+	public Page<VirtualHousePrice> getAllPrices(Integer pageNo) {
+		PageHelper.startPage(pageNo, 20);
+		return	vmapper.selectAll();
 	}
 
 	public int buyHouse(Authentication authentication, int aptCode) {
