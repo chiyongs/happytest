@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.pagehelper.Page;
 import com.ssafy.happyhouse.model.domain.GameEntity;
 import com.ssafy.happyhouse.model.domain.VirtualHousePrice;
+import com.ssafy.happyhouse.model.dto.GameDTO;
 import com.ssafy.happyhouse.model.service.game.GameServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -44,12 +45,12 @@ public class GameRestController {
 	}
 	
 	@GetMapping("/myHouses")
-	public ResponseEntity<Page<GameEntity>> allPrices(Authentication authentication, @RequestParam Integer pageNo) {
+	public ResponseEntity<Page<GameDTO>> allPrices(Authentication authentication, @RequestParam Integer pageNo) {
 		return ResponseEntity.ok(gameService.myHouses(authentication, pageNo));
 	}
 	
 	@GetMapping("/allPrices")
-	public ResponseEntity<Page<VirtualHousePrice>> allPrices(@RequestParam Integer pageNo) {
+	public ResponseEntity<Page<GameDTO>> allPrices(@RequestParam Integer pageNo) {
 		return ResponseEntity.ok(gameService.getAllPrices(pageNo));
 	}
 }

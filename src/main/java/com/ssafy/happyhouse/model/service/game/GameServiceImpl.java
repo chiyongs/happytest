@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.ssafy.happyhouse.model.domain.GameEntity;
 import com.ssafy.happyhouse.model.domain.Member;
 import com.ssafy.happyhouse.model.domain.VirtualHousePrice;
+import com.ssafy.happyhouse.model.dto.GameDTO;
 import com.ssafy.happyhouse.model.dto.MemberDTO;
 import com.ssafy.happyhouse.model.mapper.GameMapper;
 import com.ssafy.happyhouse.model.mapper.VirtualHousePriceMapper;
@@ -30,7 +31,7 @@ public class GameServiceImpl {
 		return vmapper.start();
 	}
 	
-	public Page<VirtualHousePrice> getAllPrices(Integer pageNo) {
+	public Page<GameDTO> getAllPrices(Integer pageNo) {
 		PageHelper.startPage(pageNo, 20);
 		return	vmapper.selectAll();
 	}
@@ -84,7 +85,7 @@ public class GameServiceImpl {
 		return result;
 	}
 	
-	public Page<GameEntity> myHouses(Authentication authentication, int pageNo) {
+	public Page<GameDTO> myHouses(Authentication authentication, int pageNo) {
 		MemberDTO dto = memberService.getMemberFromToken(authentication);
 		PageHelper.startPage(pageNo, 20);
 		return mapper.findMyHouses(dto.getId());

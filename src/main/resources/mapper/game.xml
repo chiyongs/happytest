@@ -17,7 +17,7 @@
 		delete from game_entity where id = #{id}
 	</delete>
 	
-	<select id="findMyHouses" parameterType="string" resultType="GameEntity">
-	select * from game_entity where userId = #{userId}
+	<select id="findMyHouses" parameterType="string" resultType="GameDTO">
+	select g.*, h.lat, h.lng from game_entity g join houseinfo h on g.aptCode = h.aptCode where userId = #{userId}
 	</select>
 </mapper>

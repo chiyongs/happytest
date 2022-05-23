@@ -8,8 +8,8 @@
 		insert into virtual_house_price(aptCode, price) (select h.aptCode, trim((select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode))) price from houseinfo h);
 	</insert>
 	
-	<select id="selectAll" resultType="VirtualHousePrice">
-		select * from virtual_house_price order by aptCode
+	<select id="selectAll" resultType="GameDTO">
+		select v.no, v.aptCode, v.price as spendPrice, h.lat, h.lng from virtual_house_price v join houseinfo h on v.aptCode = h.aptCode order by v.aptCode
 	</select>
 	
 	<select id="findByAptCode" parameterType="int" resultType="VirtualHousePrice">
