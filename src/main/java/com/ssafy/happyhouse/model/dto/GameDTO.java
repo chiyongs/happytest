@@ -17,10 +17,6 @@ public class GameDTO {
 	private String spendPrice;
 	private String lat;
 	private String lng;
+	private String dongName;
 	
-	public GameDTO(VirtualHousePrice vhp, String userId) {
-		this.aptCode = vhp.getAptCode();
-		this.userId = userId;
-		this.spendPrice = vhp.getPrice();
-	}
 }

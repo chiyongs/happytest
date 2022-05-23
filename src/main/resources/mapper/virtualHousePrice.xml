@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="selectAll" resultType="GameDTO">
-		select v.no, v.aptCode, v.price as spendPrice, h.lat, h.lng from virtual_house_price v join houseinfo h on v.aptCode = h.aptCode order by v.aptCode
+		select v.no, v.aptCode, v.price as spendPrice, h.lat, h.lng, h.dongName from virtual_house_price v join houseinfo h on v.aptCode = h.aptCode order by v.aptCode
 	</select>
 	
 	<select id="findByAptCode" parameterType="int" resultType="VirtualHousePrice">

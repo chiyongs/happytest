@@ -1,14 +1,14 @@
 package com.ssafy.happyhouse.model.dto;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EstateNarrativeDTO {
 	
-	private final Map<String, Integer> narratives;
+	private final List<String> narratives;
 	
 	public EstateNarrativeDTO() {
-		narratives = new HashMap<>();
+		narratives = new ArrayList<>();
 		
 	}
 }

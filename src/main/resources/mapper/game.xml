@@ -18,6 +18,6 @@
 	</delete>
 	
 	<select id="findMyHouses" parameterType="string" resultType="GameDTO">
-	select g.*, h.lat, h.lng from game_entity g join houseinfo h on g.aptCode = h.aptCode where userId = #{userId}
+	select g.*, h.lat, h.lng, h.dongName from game_entity g join houseinfo h on g.aptCode = h.aptCode where userId = #{userId}
 	</select>
 </mapper>
