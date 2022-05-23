@@ -45,7 +45,8 @@ public class GameServiceImpl {
 		Member member = new Member().dtoToMember(dto);
 		
 		int housePrice = strToInt(vhp.getPrice());
-		if(housePrice <= member.getMoney()) {			
+		if(housePrice <= member.getMoney()) {	
+			member.spendMoney(housePrice);
 			member.happy();			
 			memberService.happy(member);
 			
@@ -74,6 +75,8 @@ public class GameServiceImpl {
 		game = mapper.findByUserIdAndAptCode(game);
 		
 		if(game != null) {
+			int housePrice = strToInt(vhp.getPrice());
+			member.addMoney(housePrice);
 			member.unhappy();
 			memberService.happy(member);
 			
