@@ -16,4 +16,8 @@
 	<delete id="delete" parameterType="GameEntity">
 		delete from game_entity where id = #{id}
 	</delete>
+	
+	<select id="findMyHouses" parameterType="string" resultType="GameEntity">
+	select * from game_entity where userId = #{userId}
+	</select>
 </mapper>

@@ -57,9 +57,7 @@ public class GameServiceImpl {
 		}
 
 		return result;
-	}
-	
-	
+	}	
 
 	public int sellHouse(Authentication authentication, int aptCode) {
 		int result = 0;
@@ -84,6 +82,12 @@ public class GameServiceImpl {
 		}
 		
 		return result;
+	}
+	
+	public Page<GameEntity> myHouses(Authentication authentication, int pageNo) {
+		MemberDTO dto = memberService.getMemberFromToken(authentication);
+		PageHelper.startPage(pageNo, 20);
+		return mapper.findMyHouses(dto.getId());
 	}
 	
 	private boolean isAlreadyBoughtHouse(GameEntity game) {

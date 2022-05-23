@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.Page;
+import com.ssafy.happyhouse.model.domain.GameEntity;
 import com.ssafy.happyhouse.model.domain.VirtualHousePrice;
 import com.ssafy.happyhouse.model.service.game.GameServiceImpl;
 
@@ -40,6 +41,11 @@ public class GameRestController {
 		int result = gameService.sellHouse(authentication, aptCode);
 		if(result != 0) return ResponseEntity.ok(true);
 		return ResponseEntity.ok(false);
+	}
+	
+	@GetMapping("/myHouses")
+	public ResponseEntity<Page<GameEntity>> allPrices(Authentication authentication, @RequestParam Integer pageNo) {
+		return ResponseEntity.ok(gameService.myHouses(authentication, pageNo));
 	}
 	
 	@GetMapping("/allPrices")
