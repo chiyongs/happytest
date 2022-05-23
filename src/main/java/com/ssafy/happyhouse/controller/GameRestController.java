@@ -1,7 +1,5 @@
 package com.ssafy.happyhouse.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,14 +30,16 @@ public class GameRestController {
 	
 	@PostMapping("/buy/{aptCode}")
 	public ResponseEntity<Boolean> gameBuy(Authentication authentication, @PathVariable Integer aptCode) {
-		gameService.buyHouse(authentication, aptCode);
-		return ResponseEntity.ok(true);
+		int result = gameService.buyHouse(authentication, aptCode);
+		if(result != 0) return ResponseEntity.ok(true);
+		return ResponseEntity.ok(false);
 	}
 	
 	@PostMapping("/sell/{aptCode}")
 	public ResponseEntity<Boolean> gameSell(Authentication authentication, @PathVariable Integer aptCode) {
-		gameService.sellHouse(authentication, aptCode);
-		return ResponseEntity.ok(true);
+		int result = gameService.sellHouse(authentication, aptCode);
+		if(result != 0) return ResponseEntity.ok(true);
+		return ResponseEntity.ok(false);
 	}
 	
 	@GetMapping("/allPrices")

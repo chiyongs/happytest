@@ -1,7 +1,5 @@
 package com.ssafy.happyhouse.model.service.game;
 
-import java.util.List;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,49 +36,61 @@ public class GameServiceImpl {
 	}
 
 	public int buyHouse(Authentication authentication, int aptCode) {
+		int result = 0;
 		MemberDTO dto = memberService.getMemberFromToken(authentication);
 		// 행복 지수 증가 로직
 		// 관심 매물이면 더 증가
 		VirtualHousePrice vhp = vmapper.findByAptCode(aptCode);
 		
 		Member member = new Member().dtoToMember(dto);
-		member.happy();
-
-		memberService.happy(member);
 		
-		GameEntity game = new GameEntity(vhp, dto.getId());
-		if(!isAlreadyBoughtHouse(game)) {
-			return mapper.insert(game);
+		int housePrice = strToInt(vhp.getPrice());
+		if(housePrice <= member.getMoney()) {			
+			member.happy();			
+			memberService.happy(member);
+			
+			GameEntity game = new GameEntity(vhp, dto.getId());
+			if(!isAlreadyBoughtHouse(game)) {
+				result = mapper.insert(game);
+			}
 		}
 
-		return -1;
+		return result;
 	}
 	
 	
 
 	public int sellHouse(Authentication authentication, int aptCode) {
+		int result = 0;
+		
 		MemberDTO dto = memberService.getMemberFromToken(authentication);
 		// 행복 지수 감소 로직
 		// 관심 매물이면 더 감소
 		VirtualHousePrice vhp = vmapper.findByAptCode(aptCode);
 		
 		Member member = new Member().dtoToMember(dto);
-		member.unhappy();
-
-		memberService.happy(member);
 		
-		GameEntity game = new GameEntity(vhp, dto.getId());
-		
+		GameEntity game = new GameEntity(vhp, member.getId());
 		game = mapper.findByUserIdAndAptCode(game);
 		
-		return mapper.delete(game);
+		if(game != null) {
+			member.unhappy();
+			memberService.happy(member);
+			
+			result = mapper.delete(game);
+		}
 		
+		return result;
 	}
 	
 	private boolean isAlreadyBoughtHouse(GameEntity game) {
 		GameEntity findGame = mapper.findByUserIdAndAptCode(game);
 		if(findGame == null) return false;
 		return true;
+	}
+	
+	private int strToInt(String price) {
+		return Integer.parseInt(price.substring(0, price.length()-4)+price.substring(price.length()-3));
 	}
 
 }

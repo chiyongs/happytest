@@ -20,6 +20,7 @@ public class Member {
 	private String address;
 	private String tel;
 	private int happiness;
+	private int money;
 	
 	public Member dtoToMember(MemberDTO dto) {
 		this.id = dto.getId();
@@ -29,6 +30,14 @@ public class Member {
 		this.tel = dto.getTel();
 		this.happiness = dto.getHappiness();
 		return this;
+	}
+	
+	public void spendMoney(int amount) {
+		this.money -= amount;
+	}
+	
+	public void addMoney(int amount) {
+		this.money += amount;
 	}
 	
 	public void happy() {
