@@ -8,13 +8,27 @@
 		insert into virtual_house_price(aptCode, price) (select h.aptCode, trim((select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode))) price from houseinfo h);
 	</insert>
 	
-	<select id="selectAll" resultType="GameDTO">
-		select v.no, v.aptCode, v.price as spendPrice, h.lat, h.lng, h.dongName from virtual_house_price v join houseinfo h on v.aptCode = h.aptCode order by v.aptCode
+	<select id="selectAll" resultType="VirtualHousePrice">
+		select * from virtual_house_price
+	</select>
+	
+	<select id="selectByDong" parameterType="string" resultType="VirtualHousePrice">
+		select * from virtual_house_price v join houseinfo h on v.aptCode = h.aptCode where h.dongName = #{dongName}
 	</select>
 	
 	<select id="findByAptCode" parameterType="int" resultType="VirtualHousePrice">
 		select * from virtual_house_price where aptCode = #{aptCode};
 	</select>
+	
+	<update id="modifyDong" parameterType="DongDTO">
+		update virtual_house_price v set price = #{price}
+		where v.aptCode in (select aptCode from houseinfo where dongName = #{dongName})
+	</update>
+	
+	<update id="modifyOne" parameterType="DongDTO">
+		update virtual_house_price v set price = #{price}
+		where v.aptCode = #{aptCode}
+	</update>
 	
 	<delete id="deleteAll">
 		delete from virtual_house_price;

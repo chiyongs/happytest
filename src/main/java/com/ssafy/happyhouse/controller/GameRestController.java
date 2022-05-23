@@ -53,4 +53,9 @@ public class GameRestController {
 	public ResponseEntity<Page<GameDTO>> allPrices(@RequestParam Integer pageNo) {
 		return ResponseEntity.ok(gameService.getAllPrices(pageNo));
 	}
+	
+	@GetMapping("/nextEvent")
+	public ResponseEntity<String> nextEvent() {
+		return ResponseEntity.ok(gameService.getEvent());
+	}
 }

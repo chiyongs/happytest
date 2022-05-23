@@ -1,5 +1,8 @@
 package com.ssafy.happyhouse.model.service.game;
 
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,8 +12,11 @@ import com.github.pagehelper.PageHelper;
 import com.ssafy.happyhouse.model.domain.GameEntity;
 import com.ssafy.happyhouse.model.domain.Member;
 import com.ssafy.happyhouse.model.domain.VirtualHousePrice;
+import com.ssafy.happyhouse.model.dto.DongDTO;
+import com.ssafy.happyhouse.model.dto.EstateNarrativeDTO;
 import com.ssafy.happyhouse.model.dto.GameDTO;
 import com.ssafy.happyhouse.model.dto.MemberDTO;
+import com.ssafy.happyhouse.model.dto.Narrative;
 import com.ssafy.happyhouse.model.mapper.GameMapper;
 import com.ssafy.happyhouse.model.mapper.VirtualHousePriceMapper;
 import com.ssafy.happyhouse.model.service.member.MemberService;
@@ -25,6 +31,33 @@ public class GameServiceImpl {
 	private final GameMapper mapper;
 	private final VirtualHousePriceMapper vmapper;
 	private final MemberService memberService;
+	private static EstateNarrativeDTO estate = new EstateNarrativeDTO();
+	
+	public String getEvent() {
+		Random random = new Random();
+		random.setSeed(System.currentTimeMillis());
+		
+		int randNum = random.nextInt(estate.getNarratives().size()-1);
+		Narrative narrative = estate.getNarratives().get(randNum);
+		
+		if(narrative.getType() == 0) {
+			// 모든 시세를 대상으로 한 이벤트
+			int percentage = narrative.getPercentage();
+			modifyAll(percentage);
+			return narrative.getContent();
+
+		} else {
+			int percentage = narrative.getPercentage();
+			List<String> dongs = mapper.findAllDongs();
+			
+			int randDongNum = random.nextInt(dongs.size()-1);
+			String dong = dongs.get(randDongNum);
+			
+			modifyDong(percentage, dong);			
+			return narrative.returnAddDong(dong);
+		}
+		
+	}
 
 	public int startGame() {
 		vmapper.deleteAll();
@@ -33,7 +66,7 @@ public class GameServiceImpl {
 	
 	public Page<GameDTO> getAllPrices(Integer pageNo) {
 		PageHelper.startPage(pageNo, 20);
-		return	vmapper.selectAll();
+		return	mapper.selectAll();
 	}
 
 	public int buyHouse(Authentication authentication, int aptCode) {
@@ -98,7 +131,66 @@ public class GameServiceImpl {
 	}
 	
 	private int strToInt(String price) {
-		return Integer.parseInt(price.substring(0, price.length()-4)+price.substring(price.length()-3));
+		if(price.contains(",")) {
+			return Integer.parseInt(price.substring(0, price.length()-4)+price.substring(price.length()-3));			
+		}
+		return Integer.parseInt(price);
+	}
+	
+	private String intToStr(int price) {
+		String temp = String.valueOf(price);
+		String result = "";
+		int commaCnt = 0;
+		for(int i=temp.length()-1;i>=0;i--) {
+			commaCnt++;
+			result = temp.charAt(i) + result;
+			if(i!=0 && commaCnt % 3 == 0) result = ',' + result;
+		}
+		return result;
+	}
+	
+	private void modifyAll(int percentage) {
+		List<VirtualHousePrice> vhps = vmapper.selectAll();
+		if(percentage < 0) {
+			for(int i=0,size=vhps.size();i<size;i++) {
+				int vhpPrice = strToInt(vhps.get(i).getPrice());
+				int intPrice = vhpPrice * ((100 - percentage) / 100);
+				String price = intToStr(intPrice);
+				DongDTO dto = DongDTO.builder().aptCode(vhps.get(i).getAptCode()).price(price).build();
+				vmapper.modifyOne(dto);
+			}
+		} else {
+			for(int i=0,size=vhps.size();i<size;i++) {
+				int vhpPrice = strToInt(vhps.get(i).getPrice());
+				int intPrice = vhpPrice * ((100 + percentage) / 100);
+				String price = intToStr(intPrice);
+				DongDTO dto = DongDTO.builder().aptCode(vhps.get(i).getAptCode()).price(price).build();
+				vmapper.modifyOne(dto);
+			}
+		}
+		
+	}
+	
+	private void modifyDong(int percentage, String dong) {
+		List<VirtualHousePrice> vhps = vmapper.selectByDong(dong);
+		if(percentage < 0) {
+			for(int i=0,size=vhps.size();i<size;i++) {
+				int vhpPrice = strToInt(vhps.get(i).getPrice());
+				int intPrice = vhpPrice * ((100 - percentage) / 100);
+				String price = intToStr(intPrice);
+				DongDTO dto = DongDTO.builder().aptCode(vhps.get(i).getAptCode()).dongName(dong).price(price).build();
+				vmapper.modifyDong(dto);
+			}
+		} else {
+			for(int i=0,size=vhps.size();i<size;i++) {
+				int vhpPrice = strToInt(vhps.get(i).getPrice());
+				int intPrice = vhpPrice * ((100 + percentage) / 100);
+				String price = intToStr(intPrice);
+				DongDTO dto = DongDTO.builder().aptCode(vhps.get(i).getAptCode()).dongName(dong).price(price).build();
+				vmapper.modifyDong(dto);
+			}
+		}
+		
 	}
 
 }

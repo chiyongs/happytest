@@ -13,6 +13,14 @@
 	select * from game_entity where userId = #{userId} and aptCode = #{aptCode};
 	</select>
 	
+	<select id="findAllDongs" resultType="string">
+	select dongName from dongcode
+	</select>
+	
+	<select id="selectAll" resultType="GameDTO">
+		select v.no, v.aptCode, v.price as spendPrice, h.lat, h.lng, h.dongName from virtual_house_price v join houseinfo h on v.aptCode = h.aptCode order by v.aptCode
+	</select>
+	
 	<delete id="delete" parameterType="GameEntity">
 		delete from game_entity where id = #{id}
 	</delete>
