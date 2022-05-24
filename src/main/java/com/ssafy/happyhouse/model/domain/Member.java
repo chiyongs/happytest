@@ -29,6 +29,7 @@ public class Member {
 		this.address = dto.getAddress();
 		this.tel = dto.getTel();
 		this.happiness = dto.getHappiness();
+		this.money = dto.getMoney();
 		return this;
 	}
 	
