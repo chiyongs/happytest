@@ -10,12 +10,7 @@
 	
 	
 	<update id="update" parameterType="Member">
-		update member set password=#{password}, name=#{name}, address=#{address}, tel=#{tel}
-		where id=#{id}
-	</update>
-	
-	<update id="happy" parameterType="Member">
-		update member set happiness=#{happiness}
+		update member set password=#{password}, name=#{name}, address=#{address}, tel=#{tel}, happiness=#{happiness}, money=#{money}
 		where id=#{id}
 	</update>
 	

@@ -13,7 +13,6 @@ public interface MemberService {
 	int update(Member member);
 	int modifyInfo(MemberDTO dto);
 	int delete(String id);
-	int happy(Member member);
 	JwtAuthenticationResponse login(MemberDTO loginRequest);
 	Member select(String id);
 	List<Member> selectAll();

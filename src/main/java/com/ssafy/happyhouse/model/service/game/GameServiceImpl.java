@@ -82,7 +82,7 @@ public class GameServiceImpl {
 		if(housePrice <= member.getMoney()) {	
 			member.spendMoney(housePrice);
 			member.happy();			
-			memberService.happy(member);
+			memberService.update(member);
 			
 			GameEntity game = new GameEntity(vhp, dto.getId());
 			if(!isAlreadyBoughtHouse(game)) {
@@ -110,7 +110,7 @@ public class GameServiceImpl {
 			int housePrice = strToInt(vhp.getPrice());
 			member.addMoney(housePrice);
 			member.unhappy();
-			memberService.happy(member);
+			memberService.update(member);
 			
 			result = mapper.delete(game);
 		}
