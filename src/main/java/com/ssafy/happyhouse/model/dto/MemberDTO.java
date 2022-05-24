@@ -16,6 +16,7 @@ public class MemberDTO {
 	private String tel;
 	private String address;
 	private int happiness;
+	private int money;
 	
 	public MemberDTO(Member member) {
 		this.id = member.getId();
@@ -24,6 +25,7 @@ public class MemberDTO {
 		this.tel = member.getTel();
 		this.address = member.getAddress();
 		this.happiness = member.getHappiness();
+		this.money = member.getMoney();
 	}
 	
 	public void hidePassword() {
