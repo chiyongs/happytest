@@ -16,5 +16,6 @@ public class GameDTO {
 	private String lat;
 	private String lng;
 	private String dongName;
+	private String aptName;
 	
 }

@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="selectAll" resultType="GameDTO">
-		select v.no, v.aptCode, v.price as spendPrice, h.lat, h.lng, h.dongName from virtual_house_price v join houseinfo h on v.aptCode = h.aptCode order by v.aptCode
+		select v.no, v.aptCode, v.price as spendPrice, h.lat, h.lng, h.dongName, h.aptName from virtual_house_price v join houseinfo h on v.aptCode = h.aptCode order by v.aptCode
 	</select>
 	
 	<delete id="delete" parameterType="GameEntity">
@@ -26,6 +26,6 @@
 	</delete>
 	
 	<select id="findMyHouses" parameterType="string" resultType="GameDTO">
-	select g.*, h.lat, h.lng, h.dongName from game_entity g join houseinfo h on g.aptCode = h.aptCode where userId = #{userId}
+	select g.*, h.lat, h.lng, h.dongName, h.aptName from game_entity g join houseinfo h on g.aptCode = h.aptCode where userId = #{userId}
 	</select>
 </mapper>
