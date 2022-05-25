@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.ssafy.happyhouse.model.domain.GameEntity;
 import com.ssafy.happyhouse.model.domain.Member;
 import com.ssafy.happyhouse.model.domain.VirtualHousePrice;
+import com.ssafy.happyhouse.model.dto.DailyGameDTO;
 import com.ssafy.happyhouse.model.dto.DongDTO;
 import com.ssafy.happyhouse.model.dto.EstateNarrativeDTO;
 import com.ssafy.happyhouse.model.dto.GameDTO;
@@ -32,6 +33,37 @@ public class GameServiceImpl {
 	private final VirtualHousePriceMapper vmapper;
 	private final MemberService memberService;
 	private static EstateNarrativeDTO estate = new EstateNarrativeDTO();
+	private static int[] moneyByDifficulty = {100,200,300,400,500,600,700,800,900,1000};
+	
+	public String gameDaily(DailyGameDTO dto, Authentication authentication) {
+		
+		if(dto.isSuccess()) {
+			MemberDTO mDTO = memberService.getMemberFromToken(authentication);
+			
+			Random random = new Random();
+			random.setSeed(System.currentTimeMillis());
+			int randNum = random.nextInt(3);
+			int difficulty = dto.getDifficulty();
+			Member member = new Member().dtoToMember(mDTO); 
+			if(difficulty == 1) {
+				member.addMoney(moneyByDifficulty[randNum]);
+			} else if(difficulty == 2) {
+				randNum = random.nextInt(3)+2;
+				member.addMoney(moneyByDifficulty[randNum]);
+			} else if(difficulty == 3) {
+				randNum = random.nextInt(3)+4;
+				member.addMoney(moneyByDifficulty[randNum]);
+			} else {
+				randNum = random.nextInt(3)+6;
+				member.addMoney(moneyByDifficulty[randNum]);
+			}
+			
+			memberService.update(member);
+			
+			return moneyByDifficulty[randNum] + "만원을 획득하셨습니다.";
+		}
+		return "자금 획득에 실패했습니다.";
+	}
 	
 	public String getEvent() {
 		Random random = new Random();
@@ -50,7 +82,7 @@ public class GameServiceImpl {
 			int percentage = narrative.getPercentage();
 			List<String> dongs = mapper.findAllDongs();
 			
-			int randDongNum = random.nextInt(dongs.size()-1);
+			int randDongNum = random.nextInt(dongs.size());
 			String dong = dongs.get(randDongNum);
 			
 			modifyDong(percentage, dong);			

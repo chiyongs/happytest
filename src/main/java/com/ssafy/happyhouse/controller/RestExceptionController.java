@@ -16,7 +16,7 @@ public class RestExceptionController {
 	
 	@ExceptionHandler(Exception.class)
 	private ResponseEntity<Map<String, Object>> handleFail(Exception e) {
-		log.error("rest error", e);
+		log.error("rest error", e.getMessage());
 		Map<String, Object> map = new HashMap<>();
 		map.put("success",false);
 		map.put("data",e.getMessage());

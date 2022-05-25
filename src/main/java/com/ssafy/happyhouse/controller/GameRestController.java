@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.pagehelper.Page;
 import com.ssafy.happyhouse.model.domain.GameEntity;
 import com.ssafy.happyhouse.model.domain.VirtualHousePrice;
+import com.ssafy.happyhouse.model.dto.DailyGameDTO;
 import com.ssafy.happyhouse.model.dto.GameDTO;
 import com.ssafy.happyhouse.model.service.game.GameServiceImpl;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -57,5 +59,10 @@ public class GameRestController {
 	@GetMapping("/nextEvent")
 	public ResponseEntity<String> nextEvent() {
 		return ResponseEntity.ok(gameService.getEvent());
+	}
+	
+	@PostMapping("/dailyGame")
+	public ResponseEntity<String> dailyGame(@RequestBody DailyGameDTO dto, Authentication authentication) {
+		return ResponseEntity.ok(gameService.gameDaily(dto, authentication));
 	}
 }
