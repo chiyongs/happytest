@@ -5,7 +5,7 @@
 <mapper namespace="com.ssafy.happyhouse.model.repo.MemberRepo">
 
 	<insert id="insert" parameterType="Member">
-		insert into member values(#{id}, #{password}, #{name}, #{address}, #{tel}, #{happiness}, #{money})
+		insert into member(id,password,name,address,tel,happiness,money) values(#{id}, #{password}, #{name}, #{address}, #{tel}, #{happiness}, #{money})
 	</insert>
 	
 	
