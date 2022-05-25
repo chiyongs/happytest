@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		
 		Member member = Member.builder()
-				.id(dto.getId()).password(encPassword).tel(dto.getTel()).address(dto.getAddress()).name(dto.getName()).money(10000).
+				.id(dto.getId()).password(encPassword).tel(dto.getTel()).address(dto.getAddress()).name(dto.getName()).happiness(30).money(10000).
 				build();
 		
 		return mRepo.insert(member);
