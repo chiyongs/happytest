@@ -14,7 +14,7 @@
 		where id=#{id}
 	</update>
 	
-	<update id="modifyPassword" parameterType="String">
+	<update id="modifyPassword" parameterType="Member">
 		update member set password = #{password}
 		where id=#{id}
 	</update>

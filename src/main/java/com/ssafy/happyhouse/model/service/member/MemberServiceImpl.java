@@ -108,4 +108,20 @@ public class MemberServiceImpl implements MemberService {
 		return mRepo.update(new Member().dtoToMember(dto));
 	}
 
+
+	@Override
+	public boolean verifyMember(MemberDTO dto) {
+		Member member = mRepo.select(dto.getId());
+		if(member.getName().equals(dto.getName()) && member.getTel().equals(dto.getTel())) {
+			return true;
+		}
+		return false;
+	}
+
+
+	@Override
+	public int changePassword(MemberDTO dto) {
+		return mRepo.modifyPassword(dto);
+	}
+
 }

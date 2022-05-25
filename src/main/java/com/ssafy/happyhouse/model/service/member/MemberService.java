@@ -17,4 +17,6 @@ public interface MemberService {
 	Member select(String id);
 	List<Member> selectAll();
 	MemberDTO getMemberFromToken(Authentication authentication);
+	boolean verifyMember(MemberDTO dto);
+	int changePassword(MemberDTO dto);
 }
