@@ -67,4 +67,15 @@ public class MemberRestController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 	
+	@PostMapping("/password")
+	public ResponseEntity<Boolean> findPassword(@RequestBody MemberDTO dto){
+		return new ResponseEntity<Boolean>(mService.verifyMember(dto), HttpStatus.OK);
+	}
+	
+	@PutMapping("/password")
+	public ResponseEntity<Integer> modifyPassword(@RequestBody MemberDTO dto){
+		return new ResponseEntity<Integer>(mService.changePassword(dto), HttpStatus.OK);
+	}
+	
+	
 }
