@@ -35,8 +35,7 @@ public class GameServiceImpl {
 	private static EstateNarrativeDTO estate = new EstateNarrativeDTO();
 	private static int[] moneyByDifficulty = {100,200,300,400,500,600,700,800,900,1000};
 	
-	public String gameDaily(DailyGameDTO dto, Authentication authentication) {
-		
+	public String gameDaily(DailyGameDTO dto, Authentication authentication) {	
 		if(dto.isSuccess()) {
 			MemberDTO mDTO = memberService.getMemberFromToken(authentication);
 			
