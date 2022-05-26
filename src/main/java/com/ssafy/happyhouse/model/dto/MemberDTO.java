@@ -28,7 +28,17 @@ public class MemberDTO {
 		this.money = member.getMoney();
 	}
 	
+	public void modifyPassword(String password) {
+		this.password = password;
+	}
+	
 	public void hidePassword() {
 		this.password = null;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberDTO [id=" + id + ", password=" + password + ", name=" + name + ", tel=" + tel + ", address="
+				+ address + ", happiness=" + happiness + ", money=" + money + "]";
 	}
 }

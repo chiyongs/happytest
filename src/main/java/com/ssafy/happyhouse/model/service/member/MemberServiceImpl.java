@@ -112,6 +112,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean verifyMember(MemberDTO dto) {
 		Member member = mRepo.select(dto.getId());
+		System.out.println(member);
+		System.out.println(dto);
 		if(member.getName().equals(dto.getName()) && member.getTel().equals(dto.getTel())) {
 			return true;
 		}
@@ -121,6 +123,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int changePassword(MemberDTO dto) {
+		String rawPassword = dto.getPassword();
+		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+		dto.modifyPassword(encPassword);
 		return mRepo.modifyPassword(dto);
 	}
 
